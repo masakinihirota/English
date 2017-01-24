@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding-left: 12px;
+	line-height: 22px;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark {
+	color: #DDD;
+}
+
+.vscode-high-contrast {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	padding: 10px;
+	overflow-wrap: break-word;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+:not(pre):not(.hljs) > code {
+	color: #A31515;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+</style>
+
+</head>
+<body>
+<h1>English</h1>
+<p>英語嫌いがやる英語勉強やり直し。</p>
+<p>英語が嫌いで学校の勉強からも逃げ出しそれでも英語を勉強しなければならない
+そんな英語力ゼロからどうすればいいかというお話。</p>
+<p>英語の勉強をする前に考えることがあります。</p>
+<p>英語を勉強すべきかどうか</p>
+<p>TOEIC
+TOEICは中学英語を完全に一通り終えている人がようやく最低ラインに立ったぐらいのレベル
+大学受験ができるぐらいの実力になってようやく手応えが出てくる試験。</p>
+<p>英検
+これは5級から受けるべきだが5級を受けているのは小学生ぐらいからたくさんいると思うので
+やり直しの英語をする人はせめて3級ぐらいの実力を付けてから3級を受けたい。
+4級でも中学1年がちょっと頑張れば簡単に受かるレベル。</p>
+<p>最初にやる勉強
+アルファベット
+発音記号
+単語1000個
+発声練習</p>
+<p><a href="http://amzn.to/2jm7f3L">VITAL1700英単語・熟語 改訂版 (高校基本単語と熟語をマスター) </a></p>
+<p>高校となっていますが
+中学の例文はあまりにも優しすぎるので
+やり直しの英語には不向き。</p>
+<p>VITAL1700の勉強方法
+単語を覚える＜ 完璧になる
+熟語を覚える
+GREAD2から
+英文を読む この時に熟語も覚える 熟語は文章の中で覚える。
+英文を時間を測って音読する
+VITALは中学英文がたくさんあるので音読するのに最適。
+VITALの英文がスラスラと読めるようになったら
+次は瞬間英作文
+VITALの英文は文法がバラバラなので
+最初の瞬間英作文は
+<a href="http://amzn.to/2jm514h">「どんどん話すための瞬間英作文トレーニング」</a>
+をやる。</p>
+<p>VITAL1700の音声は出版社からダウンロードできるが
+単語と文章を一つのファイルの入れてあるので
+切り分けて練習できない。</p>
+<p>VITAL1700は単語をPSSでやった後
+単語はほぼ完璧だが短い英文（熟語などを含まれた文）
+の経験が少なく読むのに慣れていないので
+短い文章がたくさんあるVITAL1700がとても役に立った。
+これをストップウォッチ片手に（GREADIIから）
+右側ページの短文集を速く読めるように何周かした。</p>
+<p>音読
+文構造と意味をしっかり理解して体に入れる作業</p>
+<p>大量の短い英文がある本
+Forest 三昧 5th
+第5版と古いがそれ以降出版されなくなったので仕方ない。
+Forestの英文が約800英文ある。
+しかも１英文に１音声ファイルがある便利なもの。
+余分な日本語もなし
+左に英文 右に日本文ときれいに分かれて
+重要な文法部分は太文字で色分けされている。
+ただ問題アプリケーションの出来がいまいち
+ファイルを掘り出してMP3プレイヤーに入れてシャードーイングなり
+ディクテーションなり使ったほうが良さそう。
+章単位で英文を読む速度を測る練習も良い。</p>
+<p>CD付き中古で700円の時買いました。
+<a href="http://amzn.to/2jFH3Cg">W&gt;Forest三昧 英語ディクテーション学習ソフト (&lt;CDーROM&gt;(Win版))</a></p>
+<p>単語
+PSSで1000語単位で一気に覚える
+大学受験なら5000語を覚える
+TOEICなら8000語覚える
+ネイティブとなんとかコミュニケーションとるなら12000語は覚える。
+問題なく生活できるぐらいだと2万語以上
+大学以上の知識層は5万語以上
+PSSで1000の単語を全部 A or S 以上にしたら
+次の1000語を新しくはじめる。
+PSSでやるなら一日100語を四択モードで
+真剣にやるなら200語～500語を毎日休まずにやる。
+PSSはJoytoKeyを使ってコントローラーで操作する。
+上のキーに1
+右のキーに2
+下のキーに3
+左のキーに4
+あとは0とかリタンキーとか
+F4（問題編集）とか
+F8（単語発音）とか
+Ctrl＋F8(文章発音)
+を適当なキーに設定する。
+英辞郎を追加すると文章が追加される
+PDICを使うと辞書が同時に見れる。
+Web辞書を使うとイメージ画像が同時に見れる。
+スキンをいじるとモニター画面に合わせてカスタマイズできる。
+デュアルディスプレイで学習すると
+右モニターにPSS画面をいっぱいに広げて（スキンカスタマイズ）
+左モニターにイメージ画像とPDIC（電子辞書）を同時に表示できる。</p>
+<p>PSSは1000語単位でユーザーを作る
+1ユーザーに付き1万語まで登録できるが
+これをスマート学習でやると
+永遠に終わりが来ないかと錯覚するほど果がない
+1000語単位なら頑張れば1,2ヶ月で終わらせられ
+その1000語の内の弱点も間違え率が高いものだけ抽出できる。</p>
+<p>1000語単位での単語の取得は
+レベル別語彙リストSVL12000｜英単語・英文法｜アルク
+http://www.alc.co.jp/vocgram/article/svl/</p>
+<p>英辞郎を買って
+PDIC（無料）をダウンロードして
+レベル別英単語で抽出して
+【Memo】単語についている「レベル」って何？：英辞郎 on the WEB：アルク
+http://eow.alc.co.jp/help/tips/tip033.html
+問題作成機能でレベルごとに単語リストを作成する。</p>
+<p>Windowsには英文を読み上げる機能もあるので調べてインストールする。</p>
+<p>英文を読むときは
+意味を理解できるまで繰り返す
+短い文を意味が理解できるまで繰り返して読む
+単語を発音して読むだけのやり方は効果が薄い。
+そして必ず音読すること
+動詞やsの置き方 時制などをきちんと毎回意識する。
+出来るなら自分で英作文出来るかどうかまで考える。
+（次の段階の瞬間英作文までやらなくても良い）</p>
+<p>短い英文をいかに早く正確に読むかを
+目標を持って時間を記録して
+自分の身になるように練習する。</p>
+<p>英語学習の順番
+文法書に出てくる短い英文を読めるようにする。
+その短い英文を大量に短時間に読めるようにする。
+その際もちろん単語も文法も構文も時制もsも理解できている状態で読む。
+英文を瞬時に日本語にする能力にしてもいいし。
+英語を英語のまま考える能力にしてもいい。
+読むときはきちんと普通に話すような感じで
+その英文を使う状況をイメージして音読する。</p>
+<p>音声があるのなら
+シャドーイングで音声について言って喋るのもいいし
+ディクテーションで音声を聞き終わってから英文を
+完璧に再現するように音読してもいい。</p>
+<p>この大量の短い英文が素早く読めるようになったら
+次は瞬間英作文に入る。</p>
+<p>自分の集中力を測る
+単語でも文章を音読するのでも
+何か連続して行うもので
+（問題を休まずに解き続ける等）
+途中で中断したり
+何か他のことが気になったりして
+集中が途切れるまでの時間を測る
+各項目ごとに（単語を記憶 文房問題を解く 音読を繰り返す）
+それぞれ時間を測って
+自分の集中力がどれくらい続くかを把握する。
+記録するのが一番良い</p>
+<p>英単語
+2,3秒だけ見て発声してそれを10数回繰り返す方法
+1回目はしっかり記憶して2回目からは思い出す作業を重視する方法
+思い出せない単語をまとめて覚え直す。
+1回毎に見て辞書で引いて意味を調べてつづりを書く方法
+それぞれ方法はあるが
+自分にあった方法
+モチベーションが続く方法を探さなくてはならない。</p>
+<p>他には
+toolを使う方法PSS Anki
+短文 長文から単語を覚える方法
+DUOなどの短文型単語帳
+長文で辞書を引きながら覚える方法（これは5-6000単語を覚えてからのほうが）</p>
+<p>単語帳はそれぞれ特徴があり難易度や網羅範囲（中学 高校 TOEIC等）が
+違うので事前に調べる必要がある。</p>
+<p>短文学習の理想
+短い英文から文法を学ぶ
+（例えば文法参考書から）
+その中の単語と熟語と文法が理解できる。
+自然に読めるようになる
+（通常はここで次の文の学習を始めてしまう）
+英語から日本語へ
+日本語から英語へ書けるようになる
+音読を30-50回行う。
+瞬間英作文が出来る。
+自然に出てくるようになるまで頑張る。</p>
+<p>薄い参考書を回すときは
+昨日やった分をもう一度やる
+それを最低3回までやる。
+ページの上の方にやった日付などを書いておくと便利。</p>
+<p>参考書を最後まで一通り終わらせてから
+もう一度やると記憶の定着が悪く非常に効率が悪い。</p>
+<p>masakinihirota/English: 英語嫌いがやる英語勉強やり直し。
+https://github.com/masakinihirota/English</p>
+<p><a href=""></a>
+<a href="URL">リンクテキスト</a>
+<a href="URL" title="タイトル">リンクテキスト</a></p>
+
+</body>
+</html>
